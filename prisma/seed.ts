@@ -1,6 +1,6 @@
 
 import bcrypt from 'bcrypt';
-import prisma from '../src/config/database';
+import {prisma} from '../src/config/database';
 
 async function main() {
 
@@ -88,7 +88,7 @@ async function main() {
 
       await prisma.users.createMany({ data: user });
       await prisma.terms.createMany({ data: terms });
-      await prisma.categorys.createMany({ data: categories });
+      await prisma.categories.createMany({ data: categories });
       await prisma.teachers.createMany({ data: teachers });
       await prisma.disciplines.createMany({ data: disciplines });
       await prisma.teachersDisciplines.createMany({ data: teachersDisciplines });
