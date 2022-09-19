@@ -3,23 +3,23 @@ import bcrypt from 'bcrypt';
 import {prisma} from '../src/config/database';
 
 async function main() {
+   
+    const login =[{
+            email: "testando@email.com",
+            password: bcrypt.hashSync("senhatest123",10),
+        },];
 
-    const user =[{
-            email: 'test@email.com',
-            password: bcrypt.hashSync('senhatest123',10)
-        }];
-
-    const terms = [ {  number: 1 }, {  number: 2 }, {  number: 3 }, {  number: 4 }, {  number: 5 }, {  number: 6 } ];
+    const terms = [ {  number: 1, }, {  number: 2, }, {  number: 3, }, {  number: 4, }, {  number: 5, }, {  number: 6, } ];
 
     const categories = [
         {
-          name: 'Projeto',
+          name: 'Projeto'
         },
         {
-          name: 'Prática',
+          name: 'Prática'
         },
         {
-          name: 'Recuperação',
+          name: 'Recuperação'
         },
       ];
     
@@ -86,12 +86,12 @@ async function main() {
         },
       ];
 
-      await prisma.users.createMany({ data: user });
-      await prisma.terms.createMany({ data: terms });
-      await prisma.categories.createMany({ data: categories });
+      await prisma.users.createMany({ data: login });
+      await prisma.term.createMany({ data: terms });
+      await prisma.categorie.createMany({ data: categories });
       await prisma.teachers.createMany({ data: teachers });
-      await prisma.disciplines.createMany({ data: disciplines });
-      await prisma.teachersDisciplines.createMany({ data: teachersDisciplines });
+      await prisma.discipline.createMany({ data: disciplines });
+      await prisma.teachersDiscipline.createMany({ data: teachersDisciplines });
 }
 main()
   .catch((e) => {

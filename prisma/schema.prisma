@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASEURL")
 }
 
 model Users {
@@ -18,58 +18,60 @@ model Users {
   @@map("users")
 }
 
-model Categories {
+model Categorie {
   id    Int     @id @default(autoincrement())
   name  String  @unique
-  tests Tests[]
+  tests Test[]
 
   @@map("categories")
 }
 
-model Tests {
+model Test {
   id                  Int                @id @default(autoincrement())
   name                String
   pdfUrl              String
-  category            Categories         @relation(fields: [categoryId], references: [id])
+  category            Categorie         @relation(fields: [categoryId], references: [id])
   categoryId          Int
-  teacherDiscipline   TeachersDisciplines @relation(fields: [teacherDisciplineId], references: [id])
+  teacherDiscipline   TeachersDiscipline @relation(fields: [teacherDisciplineId], references: [id])
   teacherDisciplineId Int
   view                Int                @default(0)
 
   @@map("tests")
 }
 
-model TeachersDisciplines {
+model TeachersDiscipline {
   id           Int         @id @default(autoincrement())
   teacher      Teachers    @relation(fields: [teacherId], references: [id])
   teacherId    Int
-  discipline   Disciplines @relation(fields: [disciplineId], references: [id])
+  discipline   Discipline @relation(fields: [disciplineId], references: [id])
   disciplineId Int
-  tests        Tests[]
+  tests        Test[]
+  
+  @@map("teachers_disciplines")
 }
 
 model Teachers {
   id                 Int                  @id @default(autoincrement())
   name               String               @unique
-  teacherDisciplines TeachersDisciplines[]
+  teacherDisciplines TeachersDiscipline[]
 
   @@map("teachers")
 }
 
-model Disciplines{
+model Discipline{
   id                 Int                 @id @default(autoincrement())
   name               String              @unique
-  term               Terms                @relation(fields: [termId], references: [id])
+  term               Term                @relation(fields: [termId], references: [id])
   termId             Int
-  teacherDisciplines TeachersDisciplines[]
+  teacherDisciplines TeachersDiscipline[]
 
   @@map("disciplines")
 }
 
-model Terms{
+model Term{
   id          Int          @id @default(autoincrement())
   number      Int          @unique
-  disciplines Disciplines[]
+  disciplines Discipline[]
 
   @@map("terms")
 }
