@@ -5,13 +5,13 @@ import {prisma} from '../src/config/database';
 async function main() {
    
     const login =[{
-            email: "testando@email.com",
+            email: "pescando@email.com",
             password: bcrypt.hashSync("senhatest123",10),
         },];
 
     const terms = [ {  number: 1, }, {  number: 2, }, {  number: 3, }, {  number: 4, }, {  number: 5, }, {  number: 6, } ];
 
-    const categories = [
+    const category = [
         {
           name: 'Projeto'
         },
@@ -88,7 +88,7 @@ async function main() {
 
       await prisma.users.createMany({ data: login });
       await prisma.term.createMany({ data: terms });
-      await prisma.category.createMany({ data: categories });
+      await prisma.category.createMany({ data: category });
       await prisma.teachers.createMany({ data: teachers });
       await prisma.discipline.createMany({ data: disciplines });
       await prisma.teachersDiscipline.createMany({ data: teachersDisciplines });

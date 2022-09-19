@@ -13,15 +13,16 @@ beforeEach(async () => {
 });
 
 describe("Users Test", () => {
+
   it("POST /signup", async () => {
     const user = {
       email: faker.internet.email(),
       password: faker.internet.password(),
     };
 
-    await supertest(app).post("/sign-up").send(user);
+    await supertest(app).post("/signup").send(user);
 
-    const createUser = await prisma.users.findFirst({
+    const createUser = await prisma.users.findUnique({
       where: { email: user.email }
     });
     expect(createUser).not.toBeNull();
@@ -34,14 +35,16 @@ describe("Users Test", () => {
     };
 
     userFactory.userCreateFactory(user);
-    const response = await supertest(app).post("/sign-in").send(user);
+    const response = await supertest(app).post("/signin").send(user);
     const { token } = response.body;
     expect(token).not.toBeNull();
   });
 
 });
+
 describe("tests about tests", () => {
   it("Create test", async () => {
+    
     const { category, discipline, teacher } = await laboratoryFactory.laboratoryOneTeacherWithOneTest();
 
     const test: TCreateTestData = {
@@ -58,11 +61,11 @@ describe("tests about tests", () => {
       .post("/tests")
       .set("Authorization", `Bearer ${token}`)
       .send(test)
+      
 
     expect(response.status).toBe(201);
 
   });
-
   it("Return tests group by disciplines", async () => {
     await laboratoryFactory.laboratoryOneTeacherWithOneTest();
     const token = await tokenFactory();
@@ -95,6 +98,8 @@ describe("tests about tests", () => {
 
 
 });
+
+
 afterAll(async () => {
   await prisma.$disconnect();
-});
+ });

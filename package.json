@@ -15,8 +15,9 @@
   },
   "homepage": "https://github.com/Uenderss/projeto20-repoprovas#readme",
   "scripts": {
+    "prisma-prod": "prisma migrate deploy",
     "prisma-test": "dotenv -e .env.test prisma migrate reset --skip-seed",
-    "test": "dotenv -e .env.test prisma migrate dev && prisma db seed &&  cross-env NODE_OPTIONS=--experimental-vm-modules  dotenv -e .env.test jest -i",
+    "test": "npm run prisma-test && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "dev": "nodemon src/server.ts",
 
     "start": "npx prisma migrate dev"
