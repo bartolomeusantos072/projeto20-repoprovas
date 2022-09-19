@@ -17,7 +17,11 @@ async function signUp(createUserData:TCreateUserData) {
     const verifyUser = await userRepository.findEmail(createUserData.email);
     if(verifyUser){
         throw conflictError("Email must bu unique");
-    }    
+    }
+    const SALT = 11;
+    const hashedPassword = bcrypt.hashSync(createUserData.password, SALT);
+  
+    await userRepository.insert({ ...createUserData, password: hashedPassword });    
 }
 
 async function loginOrFail(loginData:TCreateUserData) {
