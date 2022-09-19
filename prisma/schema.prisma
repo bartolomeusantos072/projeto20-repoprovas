@@ -18,7 +18,7 @@ model Users {
   @@map("users")
 }
 
-model Categorie {
+model Category {
   id    Int     @id @default(autoincrement())
   name  String  @unique
   tests Test[]
@@ -30,7 +30,7 @@ model Test {
   id                  Int                @id @default(autoincrement())
   name                String
   pdfUrl              String
-  category            Categorie         @relation(fields: [categoryId], references: [id])
+  category            Category         @relation(fields: [categoryId], references: [id])
   categoryId          Int
   teacherDiscipline   TeachersDiscipline @relation(fields: [teacherDisciplineId], references: [id])
   teacherDisciplineId Int

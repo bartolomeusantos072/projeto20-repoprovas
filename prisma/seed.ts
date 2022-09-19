@@ -88,7 +88,7 @@ async function main() {
 
       await prisma.users.createMany({ data: login });
       await prisma.term.createMany({ data: terms });
-      await prisma.categorie.createMany({ data: categories });
+      await prisma.category.createMany({ data: categories });
       await prisma.teachers.createMany({ data: teachers });
       await prisma.discipline.createMany({ data: disciplines });
       await prisma.teachersDiscipline.createMany({ data: teachersDisciplines });
