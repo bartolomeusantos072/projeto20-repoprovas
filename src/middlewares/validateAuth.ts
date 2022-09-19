@@ -5,7 +5,7 @@ import { unauthorizedError } from "../utils/errorUtils";
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function validateAuth(req: Request, res: Response, next: NextFunction) {
+export default async function validateAuth(req: Request, res: Response, next: NextFunction) {
 
     const authorization = req.headers["authorization"];
     if (!authorization) throw unauthorizedError("Authorization not found");
