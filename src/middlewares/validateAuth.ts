@@ -14,7 +14,7 @@ export async function validateAuth(req: Request, res: Response, next: NextFuncti
     if (!token) throw unauthorizedError("Token not found");
 
     try {
-        const { userId } = jwt.verify(token, process.env.JWT_SECRET) as {
+        const { userId } = jwt.verify(token, process.env.JWTSECRET) as {
             userId: number;
         };
         const user = await userService.findId(userId);
