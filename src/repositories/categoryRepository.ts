@@ -1,6 +1,6 @@
 import { prisma } from "../config/database";
 
-async function findMany() {
+async function findManyCategories() {
   return prisma.category.findMany();
 }
 
@@ -11,6 +11,6 @@ async function getIdCategory(id: number) {
 }
 
 export default {
-  findMany,
+  findManyCategories,
   getIdCategory
 };

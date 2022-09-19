@@ -1,6 +1,6 @@
 import { Router } from "express";
 import validateAuth from "../middlewares/validateAuth";
-import {disciplineController} from "../controllers/disciplineController";
+import disciplineController from "../controllers/disciplineController";
 
 const disciplineRouter =Router();
 

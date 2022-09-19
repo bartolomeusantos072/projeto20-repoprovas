@@ -8,7 +8,7 @@ async function getTerm(term: number) {
   return disciplineRepository.getTerm(term);
 }
 
-export const disciplineService =  {
+export default  {
   getIdDiscipline,
   getTerm,
 };

@@ -5,7 +5,7 @@ import testRepository from "../repositories/testRepository";
 
 async function optionDisciplines(option: IOption) {
     const terms = await testRepository.getTestsDiscipline(option.discipline);
-    const categories = await categoryRepository.findMany();
+    const categories = await categoryRepository.findManyCategories();
   
     return terms.map(term => buildTermsWithDisciplinesAndCategories(term, categories));
   }
@@ -14,7 +14,7 @@ async function optionTeachers(option: IOption) {
     const teachersDisciplines = await testRepository.getTestsTeachers(option.teacher);
     const testsTeachers = groupTestsTeacher(teachersDisciplines);
     
-    const categories = await categoryRepository.findMany();
+    const categories = await categoryRepository.findManyCategories();
     return groupTestsFromTeachersInCategories(testsTeachers, categories);
   }
   
@@ -80,7 +80,7 @@ function groupTestsFromTeachersInCategories(testsTeachersMap: Map<string, { test
     categories.forEach(category => {
       categoriesMap.set(category.id, { name: category.name, tests: [] });
     });
-  
+    console.log("tipo categoriesMap",typeof categoriesMap);
     return categoriesMap;
   }
   

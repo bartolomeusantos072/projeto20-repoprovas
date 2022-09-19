@@ -8,7 +8,7 @@ async function getDiscipline(discipline: number) {
     return teacherRepository.getDiscipline(discipline);
   }
 
-export const teacherService = {
+export default {
     getIdTeacher,
     getDiscipline
 }

@@ -1,17 +1,17 @@
 import { badRequestError, notFoundError } from "../utils/errorUtils";
-import { TCreateTestData } from "../utils/typeUtils";
-import {categoryService} from "./categoryService";
-import { disciplineService } from "./disciplineService";
-import { teacherService } from "./teacherService";
-import teacherDisciplineService from "../services/teacherDisciplineService";
-import testRepository from "../repositories/testRepository";
 import { IOption } from "../utils/interfaceUtils";
+import { TCreateTestData } from "../utils/typeUtils";
+import categoryService from "./categoryService";
+import disciplineService  from "./disciplineService";
 import optionService from "./optionService";
+import teacherDisciplineService from "./teacherDisciplineService";
+import teacherService  from "./teacherService";
+import testRepository from "../repositories/testRepository";
 
 
   async function insertTest(createTestData: TCreateTestData) {
     const { categoryId, teacherId, disciplineId, name, pdfUrl } = createTestData;
-  
+    
     const existingCategory = await categoryService.getIdCategory(categoryId);
     if (!existingCategory) throw badRequestError("Category doesn't exist");
   

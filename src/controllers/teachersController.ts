@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import {teacherService} from "../services/teacherService";
+import teacherService from "../services/teacherService";
 
  async function getTeachers(req:Request, res:Response) {
     const {discipline}=req.params;
