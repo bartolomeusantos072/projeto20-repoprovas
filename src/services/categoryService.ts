@@ -8,7 +8,7 @@ async function getIdCategory(id: number) {
   return categoryRepository.getIdCategory(id);
 }
 
-export default {
+export const categoryService = {
   findMany,
   getIdCategory
 };
