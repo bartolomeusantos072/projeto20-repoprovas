@@ -1,8 +1,9 @@
 import { prisma } from "../../src/config/database";
+import { TCreateUserData } from "../../src/utils/typeUtils";
 import {faker} from "@faker-js/faker";
 import bcrypt from "bcrypt";
 
-async function userCreateFactory( user: any) {
+async function userCreateFactory( user: TCreateUserData) {
     return prisma.users.create({
         data:{
             ...user,
@@ -11,9 +12,14 @@ async function userCreateFactory( user: any) {
     })    
 }
 
-function userBodyFactory():any{
+function userBodyFactory():TCreateUserData{
     return {
         email: faker.internet.email(),
         password: faker.internet.password(),
     }
+}
+
+export default{
+    userBodyFactory,
+    userCreateFactory
 }
